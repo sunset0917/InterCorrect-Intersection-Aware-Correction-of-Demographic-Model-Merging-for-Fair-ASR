@@ -1,0 +1,29 @@
+dataset_config:
+  prompt: Transcribe speech to text.
+  dataset: speech_dataset
+  val_data_path: /home/ashley-bravo/SLAM-LLM/examples/asr_librispeech/data/Fairspeech2/fairspeech_test.jsonl
+  input_type: mel
+  mel_size: 128
+  inference_mode: true
+model_config:
+  llm_name: TinyLlama-1.1B-Chat-v1.0
+  llm_path: /home/ashley-bravo/models/tinyllama
+  llm_dim: 2048
+  encoder_name: whisper
+  encoder_projector_ds_rate: 5
+  encoder_path: large-v3
+  encoder_dim: 1280
+  encoder_projector: linear
+train_config:
+  model_name: asr
+  freeze_encoder: true
+  freeze_llm: true
+  batching_strategy: custom
+  num_epochs: 1
+  val_batch_size: 32
+  num_workers_dataloader: 2
+  output_dir: /home/ashley-bravo/EXPERIMENTATION/Top-K/TaskArithmetic/1st-Method/K
+decode_log: /fair_test
+ckpt_path: /model.pt
+log_config:
+  log_file: /merged.log
